@@ -3,6 +3,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def make_coordinates(image, line_parameters):
+    """Returns two point (x,y) of a line given its slope and y-intercept.
+    To be used in display_lines(). 
+
+    line_paramaters is a tuple containig the lines slope and y-intercept
+    make_coordinates(cv.imread, (int, int)) -> np.array([int, int, int, int])
+    """
     slope, intercept = line_parameters
     y1 = image.shape[0]
     y2 = int(y1*(3/5))
@@ -11,6 +17,11 @@ def make_coordinates(image, line_parameters):
     return np.array([x1, y1, x2, y2])
 
 def average_slope_intecept(image, lines):
+    """Converts a collections of lines into two lines representing the left lane marking
+    and right lane marking.
+
+    average_slope_intercept(cv.imread, cv.HoughLinesP) -> np.array([[int, int, int, int]])
+    """
     left_fit = []
     right_fit = []
     if lines is not None:
@@ -41,12 +52,21 @@ def average_slope_intecept(image, lines):
         return np.array([[0,0,0,0]])
 
 def canny(image):
-    gray = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
-    blur = cv.GaussianBlur(gray, (5,5), 0)
-    canny = cv.Canny(blur,50, 150)
+    """Takes a colored image and returns a black and white image showing only
+    edge lines.
+
+    canny(cv.imread) -> cv.imread
+    """
+    gray = cv.cvtColor(image, cv.COLOR_RGB2GRAY)  #convert to grayscale
+    blur = cv.GaussianBlur(gray, (5,5), 0)  #remove noise
+    canny = cv.Canny(blur,50, 150)  #use canny edge detector
     return canny
 
 def display_lines(image, lines):
+    """Draw lines on top of an image.
+
+    display_lines(cv.imread, np.array([[int, int, int, int]])) -> cv.imread
+    """
     line_image = np.zeros_like(image)
     if lines is not None:
         for x1, y1, x2, y2 in lines:
@@ -54,6 +74,11 @@ def display_lines(image, lines):
     return line_image
 
 def region_of_interest(image):
+    """Crop out a section of an image to be used by canny edge detector for lane line
+    detection.
+
+    region_of_interest(cv.imread) -> cv.imread
+    """
     height = image.shape[0]
     #[(100,height), (900, height), (490,290)]
     polygons = np.array([
