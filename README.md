@@ -1,11 +1,11 @@
 # lane-detection-opencv
 Learning computer vision through OpenCV
 
-# Dependencies
+# dependencies
 Python3 \
 Numpy \
 OpenCV \
-Matplotlib \
+Matplotlib 
 
 `Will create a proper README once I have made some more headway`
 
