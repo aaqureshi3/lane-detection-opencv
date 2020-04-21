@@ -1,11 +1,15 @@
-# lane-detection-opencv
-Learning computer vision through OpenCV
+# Description
+Learning computer vision using OpenCV
 
-# dependencies
-Python3 \
-Numpy \
-OpenCV \
-Matplotlib 
+## Screenshots
 
-`Will create a proper README once I have made some more headway`
+## Setup
+Project written in Python. Requires Python version 3.5 or higher to run.
+
+### PIP Install Dependencies
+`pip install numpy opencv-python matplotlib`
+
+## Run
+
+
 
